@@ -1,0 +1,4 @@
+sudo apt install git -y
+sudo apt install kupfer -y
+sudo apt install samba -y
+
