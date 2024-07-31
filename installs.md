@@ -17,5 +17,8 @@ apps:
 - pdfarranger
 - dbbrowser for sqlite
 - dropbox
-
-En desktop instalar /home en partición sdb3 de 379gb, root en sdb2
+- Kazam
+- pdf arranger
+- oh-my-zsh
+- vlc
+  En desktop instalar /home en partición sdb3 de 379gb, root en sdb2
