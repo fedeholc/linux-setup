@@ -1,0 +1,7 @@
+[https://discuss.pixls.us/t/amd-opencl-ubuntu-22-04-not-working-with-darktable/32298/18](https://discuss.pixls.us/t/amd-opencl-ubuntu-22-04-not-working-with-darktable/32298/18)
+
+funcionó bajando el archivo amdgpu-install_22.20.50204-1_all.deb
+
+y luego:
+
+amdgpu-install --usecase=graphics --opencl=legacy --accept-eula --no-32
