@@ -8,6 +8,8 @@ apps:
 - Chrome beta
 - Firefox
 - VsCode
+- gh
+- nvm node
 - neovim
 - freefilesync
 - masterpdfeditor4
