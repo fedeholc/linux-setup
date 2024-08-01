@@ -22,15 +22,12 @@ apps:
 - Firefox
 - brave
 - neovim
-- freefilesync
 - masterpdfeditor4
-- darktable
-- dbbrowser for sqlite
-- dropbox
 - oh-my-zsh
 
 script
 
+- dbbrowser for sqlite
 - nvm node
 - Chrome
 - VsCode
@@ -38,10 +35,13 @@ script
 
 ok
 
+- darktable https://github.com/darktable-org/darktable/releases
+- freefilesync https://freefilesync.org/download.php
 - xnview https://download.xnview.com/XnViewMP-linux-x64.deb
 
 con sudo
 
+- dropbox
 - gimp
 - pdfarranger
 - Kazam
