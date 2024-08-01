@@ -3,6 +3,9 @@ sudo apt install kupfer -y
 sudo apt install samba -y
 sudo apt install kazam -y
 sudo apt install gimp -y
+sudo apt install vlc -y
+sudo apt install smplayer -y
+sudo apt install pdfarranger -y
 
 apps:
 
