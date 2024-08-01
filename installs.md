@@ -1,6 +1,8 @@
 sudo apt install git -y
 sudo apt install kupfer -y
 sudo apt install samba -y
+sudo apt install kazam -y
+sudo apt install gimp -y
 
 apps:
 
