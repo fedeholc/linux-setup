@@ -5,3 +5,7 @@ funcionó bajando el archivo amdgpu-install_22.20.50204-1_all.deb
 y luego:
 
 amdgpu-install --usecase=graphics --opencl=legacy --accept-eula --no-32
+
+
+/usr/bin/amdgpu-install --usecase=opencl  --opencl=legacy  
+
