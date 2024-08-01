@@ -1,4 +1,4 @@
-
+ver https://github.com/nvm-sh/nvm?tab=readme-ov-file
 Bajar y ejecutar script:
 
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
