@@ -16,23 +16,32 @@ sudo apt install pdfarranger -y
 
 apps:
 
-- Chrome
 - Chrome beta
 - Firefox
-- VsCode
-- gh
-- nvm node
+- brave
 - neovim
 - freefilesync
 - masterpdfeditor4
-- gimp
 - darktable
-- xnview
-- pdfarranger
 - dbbrowser for sqlite
 - dropbox
-- Kazam
-- pdf arranger
 - oh-my-zsh
+
+script
+
+- nvm node
+- Chrome
+- VsCode
+- gh
+
+ok
+
+- xnview https://download.xnview.com/XnViewMP-linux-x64.deb
+
+con sudo
+
+- gimp
+- pdfarranger
+- Kazam
 - vlc
-  En desktop instalar /home en partición sdb3 de 379gb, root en sdb2
+- pdf arranger
