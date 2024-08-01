@@ -13,6 +13,8 @@ sudo apt install vlc -y
 sudo apt install smplayer -y
 &&
 sudo apt install pdfarranger -y
+&&
+sudo apt install dropbox -y
 
 apps:
 
