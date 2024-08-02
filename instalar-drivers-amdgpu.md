@@ -15,3 +15,6 @@ Con esto:
 /usr/bin/amdgpu-install --usecase=opencl  --opencl=legacy  
 
 andá opencl, tira un error cada vez que se instala algo (similar al error de querer recompilar dkms pero son unos pocos segundos, lo otro era de minutos).
+
+aca dicen que no esta soportado 24.04 aun
+https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html
