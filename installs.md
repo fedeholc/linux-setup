@@ -15,6 +15,8 @@ sudo apt install smplayer -y
 sudo apt install pdfarranger -y
 &&
 sudo apt install dropbox -y
+&&
+sudo apt install unrar -y
 
 apps:
 
@@ -47,3 +49,4 @@ con sudo
 - Kazam
 - vlc
 - pdf arranger
+- unrar
