@@ -1,4 +1,8 @@
 #!/bin/bash
+curl https://raw.githubusercontent.com/riobard/bash-powerline/master/bash-powerline.sh > ~/.bash-powerline.sh
+
+source ~/.bash-powerline.sh
+
 
 wget https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
 
