@@ -50,3 +50,5 @@ if ! sudo apt-get -f install -y; then
 fi
 
 echo "Instalación completada con éxito."
+
+rm vscode*.deb
