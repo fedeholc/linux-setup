@@ -31,13 +31,11 @@ ok
 - darktable https://github.com/darktable-org/darktable/releases
 - freefilesync https://freefilesync.org/download.php
 - xnview https://download.xnview.com/XnViewMP-linux-x64.deb
-- powerline rust https://github.com/cirho/powerline-rust
+
 con sudo
 
-- dropbox
-- gimp
-- pdfarranger
-- Kazam
-- vlc
-- pdf arranger
-- unrar
+pendientes:
+
+- gpa (para gnupg)
+- local send
+- syncthing
