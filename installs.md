@@ -8,6 +8,7 @@ sudo apt install smplayer -y
 sudo apt install pdfarranger -y
 sudo apt install dropbox -y
 sudo apt install unrar -y
+sudo apt install gpa
 
 apps:
 
@@ -31,13 +32,12 @@ ok
 - darktable https://github.com/darktable-org/darktable/releases
 - freefilesync https://freefilesync.org/download.php
 - xnview https://download.xnview.com/XnViewMP-linux-x64.deb
+- local send https://localsend.org/download
 
 con sudo
 
 pendientes:
 
-- gpa (para gnupg)
-- local send
 - syncthing
 
 - brave
