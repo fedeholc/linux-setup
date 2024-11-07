@@ -45,3 +45,9 @@ pendientes:
 - claves ssh en home/.ssh
 - home/.vscode (extensiones) y home/.config/Code/User
 - home/.config/google-chrome
+
+para copiar todas las subcarpetas y archivos menos nodemodules:
+rsync -av --exclude='node_modules' /origen /destino
+
+excluir también next
+rsync -av --exclude='node_modules' --exclude='.next' /ruta/de/origen/ /ruta/de/destino/
