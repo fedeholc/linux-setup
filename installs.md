@@ -46,6 +46,8 @@ pendientes:
 - lazyvim
 - tmux
 
+fonts?
+
 // a backupear copiar
 
 - claves ssh en home/.ssh
