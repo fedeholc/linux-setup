@@ -40,11 +40,18 @@ pendientes:
 - local send
 - syncthing
 
+- brave
+- chromebeta
+- kitty
+- lazyvim
+- tmux
+
 // a backupear copiar
 
 - claves ssh en home/.ssh
 - home/.vscode (extensiones) y home/.config/Code/User
 - home/.config/google-chrome
+- home/.config/darktable
 
 para copiar todas las subcarpetas y archivos menos nodemodules:
 rsync -av --exclude='node_modules' /origen /destino
