@@ -39,3 +39,9 @@ pendientes:
 - gpa (para gnupg)
 - local send
 - syncthing
+
+// a backupear copiar
+
+- claves ssh en home/.ssh
+- home/.vscode (extensiones) y home/.config/Code/User
+- home/.config/google-chrome
