@@ -54,6 +54,7 @@ fonts?
 - home/.vscode (extensiones) y home/.config/Code/User
 - home/.config/google-chrome
 - home/.config/darktable
+- home/.gnupg
 
 para copiar todas las subcarpetas y archivos menos nodemodules:
 rsync -av --exclude='node_modules' /origen /destino
