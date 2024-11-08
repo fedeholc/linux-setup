@@ -55,9 +55,9 @@ fonts?
 - home/.config/google-chrome
 - home/.config/darktable
 - home/.gnupg
-
-para copiar todas las subcarpetas y archivos menos nodemodules:
-rsync -av --exclude='node_modules' /origen /destino
+- home/.loca/share/fonts
+  para copiar todas las subcarpetas y archivos menos nodemodules:
+  rsync -av --exclude='node_modules' /origen /destino
 
 excluir también next
 rsync -av --exclude='node_modules' --exclude='.next' /ruta/de/origen/ /ruta/de/destino/
