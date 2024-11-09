@@ -9,11 +9,9 @@ checkiar que quedó instalado
 
 command -v nvm
 
-
 You can list available versions using ls-remote:
 
 nvm ls-remote
-
 
 To install a specific version of node:
 
@@ -23,3 +21,5 @@ instalar ultima lts con
 
 nvm install --lts
 nvm use --lts
+
+(luego hay que hacer `sudo apt install npm` para instalar npm)
