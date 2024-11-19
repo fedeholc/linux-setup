@@ -12,3 +12,11 @@ Pero mejor usar SSH que no pide autenticar cada vez:
   Para ver la clave: `<!-- cat ~/.ssh/id_rsa.pub -->`
 - Cambiar la URL del repo a SSH (si ya estaba clonado usando HTTPS):
   `git remote set-url origin git@github.com:fedeholc/repo.git`
+
+si no funciona la conexión probar `ssh -T git@github.com` para ver si se conecta.
+Si no conecta, crear el archivo `~/.ssh/config` y agregarle:
+```bash 
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+```
