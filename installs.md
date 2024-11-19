@@ -38,7 +38,7 @@ con sudo
 
 pendientes:
 
-- syncthing
+- syncthing / resilio
 
 - brave
 - chromebeta
