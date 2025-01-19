@@ -1,4 +1,3 @@
-
 apps:
 
 - Chrome beta
@@ -8,14 +7,6 @@ apps:
 - masterpdfeditor4
 - oh-my-zsh
 
-script
-
-- dbbrowser for sqlite
-- nvm node
-- Chrome
-- VsCode
-- gh
-
 ok
 
 - darktable https://github.com/darktable-org/darktable/releases
@@ -23,12 +14,9 @@ ok
 - xnview https://download.xnview.com/XnViewMP-linux-x64.deb
 - local send https://localsend.org/download
 
-con sudo
-
 pendientes:
 
 - syncthing / resilio
-
 - brave
 - chromebeta
 - kitty
