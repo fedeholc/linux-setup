@@ -10,6 +10,9 @@ sudo apt install smplayer -y
 sudo apt install unrar -y
 sudo apt install vlc -y
 
+sudo apt install wmctrl -y
+sudo apt install xdotool -y
+
 apps:
 
 - Chrome beta
