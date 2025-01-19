@@ -1,7 +1,7 @@
 sudo apt install dropbox -y
 sudo apt install gimp -y
 sudo apt install git -y
-sudo apt install gpa
+sudo apt install gpa -y
 sudo apt install kazam -y
 sudo apt install kupfer -y
 sudo apt install pdfarranger -y
