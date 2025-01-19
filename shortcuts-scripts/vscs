@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Debugging
+set -x
+exec 2>/tmp/toggle-vscode.log
+
+# Obtener todas las ventanas de VSCode abiertas y guardarlas en un array
+mapfile -t VSC_ARRAY < <(wmctrl -lx | grep -i "code.Code" | cut -f1 -d' ')
+
+# Si no hay ventanas de VSCode, salir
+if [ ${#VSC_ARRAY[@]} -eq 0 ]; then
+    echo "No hay ventanas de VSCode abiertas"
+    exit 1
+fi
+
+# Obtener el ID de la ventana activa y convertirlo a hexadecimal
+CURRENT_WINDOW=$(printf "0x%08x" $(xdotool getactivewindow))
+
+# Encontrar la posición de la ventana activa en el array
+CURRENT_INDEX=-1
+for i in "${!VSC_ARRAY[@]}"; do
+    if [ "${VSC_ARRAY[$i]}" = "$CURRENT_WINDOW" ]; then
+        CURRENT_INDEX=$i
+        break
+    fi
+done
+
+# Si la ventana actual no es VSCode, activar la primera ventana de VSCode
+if [ $CURRENT_INDEX -eq -1 ]; then
+    wmctrl -i -a "${VSC_ARRAY[0]}"
+    exit 0
+fi
+
+# Calcular el índice de la siguiente ventana
+NEXT_INDEX=$(( (CURRENT_INDEX + 1) % ${#VSC_ARRAY[@]} ))
+
+# Activar la siguiente ventana
+wmctrl -i -a "${VSC_ARRAY[$NEXT_INDEX]}"

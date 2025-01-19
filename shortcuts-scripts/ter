@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Intenta cambiar a la terminal
+if ! wmctrl -a "Terminal" -x; then
+    # Si no existe, abre una nueva terminal
+    gnome-terminal
+fi
