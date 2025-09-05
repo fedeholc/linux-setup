@@ -22,7 +22,7 @@ pendientes:
 - kitty
 - lazyvim
 - tmux
-
+- ghostty
 fonts?
 
 // a backupear copiar

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Script para mergear dos ramas y volver a la rama de origen
+# Uso: gmerge <rama_destino> <rama_origen>
+
+set -e  # hace que el script falle si algún comando falla
+
+target=$1
+source=$2
+
+if [[ -z "$target" || -z "$source" ]]; then
+  echo "Uso: gmerge <rama_destino> <rama_origen>"
+  exit 1
+fi
+
+git checkout "$target"
+git merge "$source"
+git push
+git checkout "$source"
