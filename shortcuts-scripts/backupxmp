@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# Copia todos los archivos .xmp que están en las subcarpetas de /home/fede/misfotos
+# a /home/fede/temp/backupxmp (preservando la estructura de carpetas para evitar colisiones),
+# luego comprime esa carpeta en un ZIP con fecha (p. ej. backupxmp-YYYYmmdd-HHMMSS.zip)
+# y lo copia a /home/fede/Dropbox.
+
+set -euo pipefail
+IFS=$'\n\t'
+
+SRC_DIR="/home/fede/misfotos"
+BACKUP_DIR="/home/fede/temp/backupxmp"
+# Nombre del ZIP con marca de tiempo para histórico
+TS=$(date +%Y%m%d-%H%M%S)
+ZIP_NAME="backupxmp-${TS}.zip"
+ZIP_PATH="/home/fede/temp/${ZIP_NAME}"
+DROPBOX_DIR="/home/fede/Dropbox"
+
+log() { echo "[backupxmp] $*"; }
+err() { echo "[backupxmp][ERROR] $*" >&2; }
+
+# Comprobaciones previas
+if [[ ! -d "$SRC_DIR" ]]; then
+	err "No existe el directorio de origen: $SRC_DIR"
+	exit 1
+fi
+
+if ! command -v rsync >/dev/null 2>&1; then
+	err "rsync no está instalado. Instálalo e intenta de nuevo."
+	exit 1
+fi
+
+if ! command -v zip >/dev/null 2>&1; then
+	err "zip no está instalado. Instálalo e intenta de nuevo."
+	exit 1
+fi
+
+# Preparar destino
+log "Creando carpeta destino: $BACKUP_DIR"
+mkdir -p "$BACKUP_DIR"
+
+# Sincronizar únicamente archivos .xmp preservando estructura y borrando entradas obsoletas
+log "Copiando archivos .xmp desde $SRC_DIR a $BACKUP_DIR (solo .xmp, con estructura)"
+rsync -a --delete -m \
+	--include '*/' \
+	--include '*.xmp' \
+	--exclude '*' \
+	"$SRC_DIR"/ "$BACKUP_DIR"/
+
+# Comprobar si se copiaron archivos
+if ! find "$BACKUP_DIR" -type f -name '*.xmp' -print -quit | grep -q .; then
+	err "No se encontraron archivos .xmp para respaldar."
+	exit 2
+fi
+
+# Crear el zip (asegurarse de no comprimir un zip previo dentro del mismo)
+log "Creando archivo ZIP: $ZIP_PATH"
+rm -f "$ZIP_PATH"
+(
+	cd "$(dirname "$ZIP_PATH")"
+	zip -r -q "$(basename "$ZIP_PATH")" "$(basename "$BACKUP_DIR")"
+)
+
+# Copiar a Dropbox
+log "Copiando ZIP a Dropbox: $DROPBOX_DIR/$ZIP_NAME"
+mkdir -p "$DROPBOX_DIR"
+cp -f "$ZIP_PATH" "$DROPBOX_DIR/$ZIP_NAME"
+
+log "Respaldo completado con éxito."
+
