@@ -9,6 +9,7 @@ apps:
 
 ok
 
+- starship prompt Starship https://share.google/pZwJEjkzaJNG9ifkP
 - darktable https://github.com/darktable-org/darktable/releases
 - freefilesync https://freefilesync.org/download.php
 - xnview https://download.xnview.com/XnViewMP-linux-x64.deb
@@ -23,7 +24,7 @@ pendientes:
 - lazyvim
 - tmux
 - ghostty
-fonts?
+  fonts?
 
 // a backupear copiar
 
