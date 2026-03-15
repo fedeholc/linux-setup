@@ -1,0 +1,2 @@
+12 9 * * * ~/repos/linux-setup/scripts/backup-home
+10 9 * * * ~/repos/linux-setup/scripts/backupxmp
