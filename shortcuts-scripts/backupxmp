@@ -3,7 +3,7 @@
 # Copia todos los archivos .xmp que están en las subcarpetas de /home/fede/misfotos
 # a /home/fede/temp/backupxmp (preservando la estructura de carpetas para evitar colisiones),
 # luego comprime esa carpeta en un ZIP con fecha (p. ej. backupxmp-YYYYmmdd-HHMMSS.zip)
-# y lo copia a ZIP_DEST.
+# y lo copia a /home/fede/Dropbox.
 
 set -euo pipefail
 IFS=$'\n\t'
@@ -14,7 +14,7 @@ BACKUP_DIR="/home/fede/temp/backupxmp"
 TS=$(date +%Y%m%d-%H%M%S)
 ZIP_NAME="backupxmp-${TS}.zip"
 ZIP_PATH="/home/fede/temp/${ZIP_NAME}"
-ZIP_DEST="/home/fede/misfotos/backup-xmps"
+DROPBOX_DIR="/home/fede/Dropbox"
 
 log() { echo "[backupxmp] $*"; }
 err() { echo "[backupxmp][ERROR] $*" >&2; }
@@ -62,9 +62,9 @@ rm -f "$ZIP_PATH"
 )
 
 # Copiar a Dropbox
-log "Copiando ZIP a Dropbox: $ZIP_DEST/$ZIP_NAME"
-mkdir -p "$ZIP_DEST"
-cp -f "$ZIP_PATH" "$ZIP_DEST/$ZIP_NAME"
+log "Copiando ZIP a Dropbox: $DROPBOX_DIR/$ZIP_NAME"
+mkdir -p "$DROPBOX_DIR"
+cp -f "$ZIP_PATH" "$DROPBOX_DIR/$ZIP_NAME"
 
 log "Respaldo completado con éxito."
 
