@@ -1,3 +1,37 @@
+Lo que está debajo funcionó la primera vez luego dejo de andar (en alguna actualización supongo)
+
+Para reparar lo que hice fue
+
+- desinstalar: sudo apt autoremove --purge nvidia\*
+- bajar el driver de la web de nvidia: NVIDIA-Linux-x86_64-535.183.01.run
+- Instalarlo. Para instalarlo hay que correrlo sin el X server (entorno gráfico). Para eso hay que seguir estos pasos:
+
+Step 1: Switch to a TTY
+Press Ctrl + Alt + F3 (or F4, F5, etc.) on your keyboard.
+
+This will take you to a black screen with a login prompt.
+
+Log in with your standard username and password.
+
+Step 2: Stop the Display Manager
+The "X server" is managed by a service. You need to stop it based on which desktop environment you are using. Run the command that matches your system:
+
+Ubuntu / Debian / Pop!\_OS (GNOME):
+sudo systemctl stop gdm
+
+Linux Mint (Cinnamon) / XFCE:
+sudo systemctl stop lightdm
+
+Step 3: Run the Installer
+Now that the UI is dead, navigate to your download folder and run the .run file again:
+sudo sh ./NVIDIA-Linux-x86_64-xxx.xx.run
+
+Step 4: Reboot
+Once the installer finishes successfully, don't just try to start the UI manually. It’s much cleaner to just reboot the whole machine:
+sudo reboot
+
+---
+
 El error `driver (null)` indica que, aunque el sistema ve físicamente la placa (el ID `10de:2484` corresponde efectivamente a la **RTX 3070**), el kernel de Linux no tiene cargado el módulo de Nvidia para manejarla, o hay un conflicto con el driver genérico.
 
 Para solucionar esto en Linux Mint, seguí estos pasos en orden:
