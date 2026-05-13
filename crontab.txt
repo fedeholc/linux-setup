@@ -1,2 +1,4 @@
 12 9 * * * ~/repos/linux-setup/scripts/backup-home
 10 9 * * * ~/repos/linux-setup/scripts/backupxmp
+13 9 * * * ~/repos/linux-setup/scripts/backup-env.sh
+14 9 * * * ~/repos/linux-setup/scripts/backup-conf.sh

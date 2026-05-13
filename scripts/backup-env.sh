@@ -1,10 +1,19 @@
 #!/bin/bash
+
+export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+
 src_dir="$HOME/repos"
 dest_dir="$HOME/Dropbox"
 output="env_backup_$(date +%Y%m%d_%H%M%S).zip"
+pass_file="$HOME/.backup_pass"
 
-read -rsp "Password para el zip: " password
-echo
+if [ ! -f "$pass_file" ]; then
+  echo "Error: No existe $pass_file" >&2
+  exit 1
+fi
+
+password=$(cat "$pass_file")
+
 find "$src_dir" -name '.env*' -type f -print | zip -P "$password" "$output" -@
 
 if [ -f "$output" ]; then
