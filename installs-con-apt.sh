@@ -9,7 +9,7 @@ sudo apt install samba -y
 sudo apt install smplayer -y
 sudo apt install unrar -y
 sudo apt install vlc -y
-
+sudo apt install copyq -y
 # para los shortcuts
 sudo apt install wmctrl -y
 sudo apt install xdotool -y
