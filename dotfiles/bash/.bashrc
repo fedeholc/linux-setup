@@ -22,6 +22,11 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # opencode
 export PATH=/home/fede/.opencode/bin:$PATH
+
+# oc: run opencode non-interactively with a prompt and print result to terminal
+oc() {
+  opencode run "$@"
+}
 export PATH=/home/fede/repos/linux-setup/shortcuts:$PATH
 export PATH=/home/fede/repos/linux-setup/scripts:$PATH
 

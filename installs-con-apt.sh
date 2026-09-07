@@ -10,6 +10,7 @@ sudo apt install smplayer -y
 sudo apt install unrar -y
 sudo apt install vlc -y
 sudo apt install copyq -y
+sudo apt install stow -y
 # para los shortcuts
 sudo apt install wmctrl -y
 sudo apt install xdotool -y
