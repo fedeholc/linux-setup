@@ -27,6 +27,11 @@ export PATH=/home/fede/.opencode/bin:$PATH
 oc() {
   opencode run "$@"
 }
+
+# ocp: run opencode in plan mode (read-only, produces a plan)
+ocp() {
+  opencode run --agent plan "$@"
+}
 export PATH=/home/fede/repos/linux-setup/shortcuts:$PATH
 export PATH=/home/fede/repos/linux-setup/scripts:$PATH
 
