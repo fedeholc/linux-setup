@@ -6,7 +6,7 @@ apps:
 - neovim
 - masterpdfeditor4
 - oh-my-zsh
-- vuescan https://www.hamrick.com/alternate-versions.html  
+
 ok
 
 - starship prompt Starship https://share.google/pZwJEjkzaJNG9ifkP
