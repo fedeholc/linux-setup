@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+# appimage-install: agrega un AppImage al menu de aplicaciones con su icono.
+# Uso: appimage-install /ruta/a/App.AppImage ["Nombre visible opcional"]
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+    echo "Uso: appimage-install /ruta/a/App.AppImage [\"Nombre visible\"]" >&2
+    exit 1
+fi
+
+APP="$(readlink -f "$1")"
+[ -f "$APP" ] || { echo "No existe: $1" >&2; exit 1; }
+chmod +x "$APP" 2>/dev/null || true
+
+FORCED_NAME="${2:-}"
+APPS_DIR="$HOME/.local/share/applications"
+ICON_BASE="$HOME/.local/share/icons/hicolor"
+TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+
+# 1) Desempaquetar el AppImage para sacar .desktop e iconos
+( cd "$TMP" && "$APP" --appimage-extract >/dev/null 2>&1 ) || true
+ROOT="$TMP/squashfs-root"
+[ -d "$ROOT" ] || { echo "No pude extraer el contenido de $APP" >&2; exit 1; }
+
+SRC_DESKTOP="$(find "$ROOT" -maxdepth 2 -name '*.desktop' 2>/dev/null | head -1 || true)"
+[ -n "$SRC_DESKTOP" ] || SRC_DESKTOP="$(find "$ROOT" -name '*.desktop' 2>/dev/null | head -1 || true)"
+
+get() { # get CLAVE < archivo
+    [ -n "${2:-}" ] && [ -f "$2" ] || return 0
+    sed -n "s/^$1=//p" "$2" | head -1
+}
+
+NAME="$(get Name "$SRC_DESKTOP")"
+COMMENT="$(get Comment "$SRC_DESKTOP")"
+CATEGORIES="$(get Categories "$SRC_DESKTOP")"
+TERMINAL="$(get Terminal "$SRC_DESKTOP")"
+ICON_REF="$(get Icon "$SRC_DESKTOP")"
+
+[ -n "$FORCED_NAME" ] && NAME="$FORCED_NAME"
+[ -n "$NAME" ] || NAME="$(basename "$APP" | sed -E 's/[-_.]?[0-9]+(\.[0-9]+)*[-_.]?(x86_64|amd64|aarch64|i386|i686)?\.AppImage$//I; s/\.AppImage$//I; s/[-_]+/ /g')"
+[ -n "$CATEGORIES" ] || CATEGORIES="Utility;"
+[ -n "$TERMINAL" ] || TERMINAL="false"
+[ -n "$COMMENT" ] || COMMENT="$NAME (AppImage)"
+
+SLUG="$(basename "$APP" | sed -E 's/[-_.]?[0-9]+(\.[0-9]+)*[-_.]?(x86_64|amd64|aarch64|i386|i686)?\.AppImage$//I; s/\.AppImage$//I' | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')"
+[ -n "$SLUG" ] || SLUG="appimage-$(date +%s)"
+
+# 2) Localizar el icono dentro del AppImage
+ICON_FILE=""
+if [ -n "$ICON_REF" ]; then
+    ICON_FILE="$(find "$ROOT" -name "${ICON_REF}.png" -printf '%s %p\n' 2>/dev/null | sort -rn | head -1 | cut -d' ' -f2- || true)"
+    [ -n "$ICON_FILE" ] || ICON_FILE="$(find "$ROOT" \( -name "${ICON_REF}.svg" -o -name "${ICON_REF}.xpm" \) 2>/dev/null | head -1 || true)"
+    [ -n "$ICON_FILE" ] || ICON_FILE="$(find "$ROOT" -name "${ICON_REF}*" 2>/dev/null | grep -Ev '\.(desktop|txt)$' | head -1 || true)"
+fi
+[ -n "$ICON_FILE" ] || ICON_FILE="$(find "$ROOT" -maxdepth 4 \( -name '*.svg' -o -name '*.png' \) -size +1k 2>/dev/null | sort -r | head -1 || true)"
+[ -n "$ICON_FILE" ] || { [ -e "$ROOT/.DirIcon" ] && ICON_FILE="$ROOT/.DirIcon"; }
+
+ICON_VALUE="$SLUG"
+if [ -n "$ICON_FILE" ] && [ -e "$ICON_FILE" ]; then
+    ICON_FILE="$(readlink -f "$ICON_FILE")"
+    EXT="${ICON_FILE##*.}"; EXT="${EXT,,}"
+    if [ -z "$EXT" ] || [ ${#EXT} -gt 5 ]; then
+        EXT="$(file -b --mime-type "$ICON_FILE" 2>/dev/null)"
+        case "$EXT" in
+            image/png) EXT="png" ;;
+            image/svg+xml) EXT="svg" ;;
+            image/x-xpixmap) EXT="xpm" ;;
+            image/jpeg) EXT="jpg" ;;
+            *) EXT="png" ;;
+        esac
+    fi
+    case "$EXT" in png|svg|xpm) ;; *) EXT="png" ;; esac
+    if [ "$EXT" = "png" ]; then
+        PX="$(file -b "$ICON_FILE" | grep -oE '[0-9]+ x [0-9]+' | head -1 | tr -d ' ' | cut -d x -f1)"
+        PX="${PX:-256}"
+        DEST="$ICON_BASE/${PX}x${PX}/apps"
+    else
+        DEST="$ICON_BASE/scalable/apps"
+    fi
+    mkdir -p "$DEST"
+    cp -f "$ICON_FILE" "$DEST/$SLUG.$EXT"
+    ICON_VALUE="$SLUG"
+    gtk-update-icon-cache -f -t "$ICON_BASE" >/dev/null 2>&1 || true
+    echo "Icono instalado: $DEST/$SLUG.$EXT"
+else
+    ICON_VALUE="application-x-executable"
+    echo "Aviso: no encontre icono dentro del AppImage, uso uno generico."
+fi
+
+# 3) Crear el lanzador .desktop
+mkdir -p "$APPS_DIR"
+FILE="$APPS_DIR/$SLUG.desktop"
+cat > "$FILE" <<EOF
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=$NAME
+Comment=$COMMENT
+Exec="$APP" %U
+TryExec=$APP
+Icon=$ICON_VALUE
+Terminal=$TERMINAL
+Categories=$CATEGORIES
+StartupNotify=true
+EOF
+
+chmod +x "$FILE"
+update-desktop-database "$APPS_DIR" >/dev/null 2>&1 || true
+
+echo "Lanzador creado: $FILE"
+echo "Listo: \"$NAME\" ya aparece en el menu de aplicaciones."

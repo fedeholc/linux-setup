@@ -159,3 +159,11 @@ export PATH="$HOME/ollama/bin:$PATH"
 
 alias backupenv='bash ~/repos/linux-setup/scripts/backup-env.sh'
 alias backupconf='bash ~/repos/linux-setup/scripts/backup-conf.sh'
+
+# pnpm
+export PNPM_HOME='/home/fede/.local/share/pnpm'
+case ":$PATH:" in
+  ":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
