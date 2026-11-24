@@ -1,0 +1,10 @@
+{
+    "uuid": "cron-monitor@fede",
+    "name": "Monitor de cron",
+    "description": "Muestra los cronjobs del usuario y del sistema, los timers de systemd y los trabajos de cron que están corriendo.",
+    "version": "1.0.0",
+    "author": "fede",
+    "max-instances": "1",
+    "prevent-decorations": false,
+    "icon": "appointment-soon"
+}

@@ -1,0 +1,63 @@
+{
+    "refresh-interval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 3600,
+        "step": 5,
+        "units": "segundos",
+        "description": "Actualizar cada",
+        "tooltip": "Cada cuánto se vuelven a leer los cronjobs, los timers y los procesos."
+    },
+    "max-items": {
+        "type": "spinbutton",
+        "default": 8,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "units": "filas",
+        "description": "Máximo de filas por sección",
+        "tooltip": "Cuántas entradas mostrar por sección antes de resumir con “+N más”."
+    },
+    "font-size": {
+        "type": "spinbutton",
+        "default": 11,
+        "min": 7,
+        "max": 24,
+        "step": 1,
+        "units": "px",
+        "description": "Tamaño de fuente"
+    },
+    "show-user": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar crontab del usuario"
+    },
+    "show-system": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar crontab del sistema",
+        "tooltip": "Incluye /etc/crontab y los archivos de /etc/cron.d."
+    },
+    "show-cron-dirs": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar tareas periódicas de run-parts",
+        "tooltip": "Contenido de /etc/cron.hourly, daily, weekly y monthly."
+    },
+    "show-timers": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar timers de systemd"
+    },
+    "show-running": {
+        "type": "switch",
+        "default": true,
+        "description": "Mostrar trabajos de cron en ejecución"
+    },
+    "show-disabled": {
+        "type": "switch",
+        "default": false,
+        "description": "Mostrar cronjobs comentados (desactivados)"
+    }
+}
