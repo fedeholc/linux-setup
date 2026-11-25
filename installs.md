@@ -10,20 +10,36 @@ apps:
 ok
 
 - starship prompt Starship https://share.google/pZwJEjkzaJNG9ifkP
+
 - darktable https://github.com/darktable-org/darktable/releases
+
 - freefilesync https://freefilesync.org/download.php
+
 - xnview https://download.xnview.com/XnViewMP-linux-x64.deb
+
 - local send https://localsend.org/download
+
 - herdr
+
 - glow (visualizador de markdown en la terminal) https://github.com/charmbracelet/glow
-pendientes:
+
+- marktext [MarkText — The Markdown editor that gets out of your way](https://marktext.me/#download)
+
+  
+  pendientes:
 
 - syncthing / resilio
+
 - brave
+
 - chromebeta
+
 - kitty
+
 - lazyvim
+
 - tmux
+
 - ghostty
   fonts?
 
