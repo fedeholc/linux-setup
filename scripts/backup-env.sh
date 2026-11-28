@@ -14,11 +14,11 @@ fi
 
 password=$(cat "$pass_file")
 
-find "$src_dir" -name '.env*' -type f -print | zip -P "$password" "$output" -@
+find "$src_dir" \( -name '.env*' -o -name '.dev.vars*' \) -type f -print | zip -P "$password" "$output" -@
 
 if [ -f "$output" ]; then
   mv "$output" "$dest_dir/"
   echo "Creado: $dest_dir/$output"
 else
-  echo "No se encontraron archivos .env* en $src_dir"
+  echo "No se encontraron archivos .env* ni .dev.vars* en $src_dir"
 fi
